@@ -5,6 +5,7 @@ output:  github_document
 
 ```{r, echo = FALSE, message = FALSE}
 library(tidyverse)
+library(readxl)
 ```
 
 ## Problem 1
@@ -65,3 +66,17 @@ a_train_ada_count =
 ```
 
 The A train serves ``r a_train_station_count`` distinct stations, of which ``r a_train_ada_count`` are ADA compliant.
+
+
+## Problem 2
+Import the Mr. Trash Wheel data
+```{r}
+mr_trash_wheel =
+  read_excel("data/202509 Trash Wheel Collection Data.xlsx",
+    sheet = "Mr. Trash Wheel",
+    range = "A2:N709") |>
+  janitor::clean_names() |>
+  filter(!is.na(dumpster)) |>
+  mutate(sports_balls = as.integer(round(sports_balls)))
+```
+
