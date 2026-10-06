@@ -75,9 +75,9 @@ The A train serves ``r a_train_station_count`` distinct stations and ``r a_train
 ### Import and tidy Mr. Trash Wheel data
 ```{r}
 mr_trash_wheel =
-  read_excel("data/202509 Trash Wheel Collection Data.xlsx",
+  read_excel("data/202610 Trash Wheel Collection Data.xlsx",
     sheet = "Mr. Trash Wheel",
-    range = "A2:N709") |>
+    range = "A2:N742") |>
   janitor::clean_names() |>
   filter(!is.na(dumpster)) |>
   mutate(sports_balls = as.integer(round(sports_balls)),
@@ -88,18 +88,19 @@ mr_trash_wheel =
 ### Import and tidy Professor Trash Wheel and Gwynnda
 ```{r}
 professor_trash_wheel =
-  read_excel("data/202509 Trash Wheel Collection Data.xlsx",
+  read_excel("data/202610 Trash Wheel Collection Data.xlsx",
     sheet = "Professor Trash Wheel",
-    range = "A2:M134") |>
+    range = "A2:M139",
+    na = c("", "dive")) |>
   janitor::clean_names() |>
   filter(!is.na(dumpster)) |>
   mutate(year = as.integer(year),
          wheel = "Professor Trash Wheel")
 
 gwynnda_falls_trash_wheel =
-  read_excel("data/202509 Trash Wheel Collection Data.xlsx",
-    sheet = "Gwynns Falls Trash Wheel",
-    range = "A2:L351") |>
+  read_excel("data/202610 Trash Wheel Collection Data.xlsx",
+    sheet = "Gwynnda the Good Wheel of the W",
+    range = "A2:L394") |>
   janitor::clean_names() |>
   filter(!is.na(dumpster)) |>
   mutate(year = as.integer(year),
